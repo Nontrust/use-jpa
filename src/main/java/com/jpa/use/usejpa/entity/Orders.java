@@ -13,7 +13,7 @@ public class Orders {
     @ManyToOne
     private Member member;
     @OneToOne
-    private Delivery delevery;
+    private Delivery delivery;
 
     private LocalDateTime orderDate;
     @Enumerated(STRING)

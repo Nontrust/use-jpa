@@ -8,7 +8,7 @@ import static jakarta.persistence.EnumType.STRING;
 public class Delivery {
     @Id
     private Long id;
-    private Adress adress;
+    private Address address;
     @Enumerated(STRING)
     private State state;
 

@@ -7,5 +7,5 @@ import jakarta.persistence.Id;
 public class Member {
     @Id
     private Long id;
-    private Adress adress;
+    private Address address;
 }
