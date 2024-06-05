@@ -1,14 +1,30 @@
 package com.jpa.use.usejpa.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Category {
-    @Id
+    @Id @Column(name = "category_id")
     private Long id;
     private String name;
-    @OneToOne
-    private Category parentId;
+
+    @ManyToMany
+    @JoinTable(
+            name = "category_item",
+            joinColumns = @JoinColumn(name="category_id"),
+            inverseJoinColumns = @JoinColumn(name = "item_id")
+    )
+
+    private List<Item> items = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name="parent_id")
+    private Category parent;
+
+    @OneToMany(mappedBy = "parent")
+    private List<Category> child  = new ArrayList<>();
+
 }
