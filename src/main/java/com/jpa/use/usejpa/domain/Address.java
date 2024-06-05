@@ -1,4 +1,4 @@
-package com.jpa.use.usejpa.entity;
+package com.jpa.use.usejpa.domain;
 
 import jakarta.persistence.Embeddable;
 

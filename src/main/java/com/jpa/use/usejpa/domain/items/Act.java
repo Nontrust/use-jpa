@@ -1,6 +1,6 @@
-package com.jpa.use.usejpa.entity.items;
+package com.jpa.use.usejpa.domain.items;
 
-import com.jpa.use.usejpa.entity.Item;
+import com.jpa.use.usejpa.domain.Item;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 
