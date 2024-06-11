@@ -1,5 +1,5 @@
 package com.jpa.use.usejpa.domain;
 
-public enum State {
+public enum OrderStatus {
     ORDERED, DELIVERED, CANCELED, DELAYED, COMPLETED
 }

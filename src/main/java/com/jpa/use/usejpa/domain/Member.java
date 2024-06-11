@@ -1,10 +1,9 @@
 package com.jpa.use.usejpa.domain;
 
-import jakarta.persistence.Embedded;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 import static lombok.AccessLevel.PROTECTED;
 
@@ -19,4 +18,7 @@ public class Member {
     private String name;
     @Embedded
     private Address address;
+
+    @OneToMany(mappedBy = "member")
+    private List<Order> order;
 }

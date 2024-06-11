@@ -22,7 +22,14 @@ public class OrderItem {
     private Long orderPrice;
     private Integer count;
 
-    public void setOrder(Order order) {
+    protected void setOrder(Order order) {
         this.order = order;
+    }
+    public void cancel(){
+        getItem().addStockQuantity(count);
+    }
+
+    public Long getTotalPrice(){
+        return this.orderPrice * count;
     }
 }
