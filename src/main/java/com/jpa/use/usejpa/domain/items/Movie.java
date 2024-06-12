@@ -10,7 +10,6 @@ import lombok.experimental.SuperBuilder;
 
 @SuperBuilder
 @RequiredArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @DiscriminatorValue("movie")
 public class Movie extends Item {

@@ -12,7 +12,6 @@ import java.util.UUID;
 
 @SuperBuilder
 @RequiredArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @DiscriminatorValue("book")
 @Entity
 public class Book extends Item {

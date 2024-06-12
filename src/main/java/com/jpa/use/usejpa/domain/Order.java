@@ -37,7 +37,7 @@ public class Order {
     private Delivery delivery;
 
     @OneToMany(mappedBy = "order", cascade = ALL)
-    private List<OrderItem> orderItems = new ArrayList<>();
+    private final List<OrderItem> orderItems = new ArrayList<>();
 
     public static Order createOrder(OrderBuilder orderBuilder, Member member, Delivery delivery, OrderItem... orderItems){
         Order order = orderBuilder
