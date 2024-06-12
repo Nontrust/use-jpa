@@ -3,6 +3,8 @@ package com.jpa.use.usejpa.domain.items;
 import com.jpa.use.usejpa.exception.ItemException;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
@@ -10,6 +12,7 @@ import java.util.UUID;
 
 @SuperBuilder
 @RequiredArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @DiscriminatorValue("book")
 @Entity
 public class Book extends Item {

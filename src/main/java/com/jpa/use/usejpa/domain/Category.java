@@ -2,12 +2,15 @@ package com.jpa.use.usejpa.domain;
 
 import com.jpa.use.usejpa.domain.items.Item;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static jakarta.persistence.FetchType.LAZY;
 
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class Category {
     @Id @Column(name = "category_id")

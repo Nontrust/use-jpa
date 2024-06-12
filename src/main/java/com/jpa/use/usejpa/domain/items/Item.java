@@ -6,10 +6,7 @@ import com.jpa.use.usejpa.exception.ItemException;
 import com.jpa.use.usejpa.exception.item.NotEnoughStockException;
 import com.jpa.use.usejpa.exception.item.NotValidatePriceException;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.util.ArrayList;
@@ -18,7 +15,7 @@ import java.util.List;
 import static jakarta.persistence.InheritanceType.SINGLE_TABLE;
 
 @SuperBuilder
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Getter
 @DiscriminatorColumn(name = "dtype")

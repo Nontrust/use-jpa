@@ -3,11 +3,14 @@ package com.jpa.use.usejpa.domain.items;
 import com.jpa.use.usejpa.exception.ItemException;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @SuperBuilder
 @RequiredArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @DiscriminatorValue("movie")
 public class Movie extends Item {

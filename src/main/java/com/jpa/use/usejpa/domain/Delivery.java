@@ -13,8 +13,8 @@ import static jakarta.persistence.EnumType.STRING;
 
 @Getter
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class Delivery {
     @Id

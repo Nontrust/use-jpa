@@ -1,6 +1,6 @@
 package com.jpa.use.usejpa.service;
 
-import com.jpa.use.usejpa.domain.Item;
+import com.jpa.use.usejpa.domain.items.Item;
 import com.jpa.use.usejpa.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

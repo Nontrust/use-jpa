@@ -1,17 +1,14 @@
 package com.jpa.use.usejpa.domain;
 
+import com.jpa.use.usejpa.domain.enumerate.OrderStatus;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.jpa.use.usejpa.domain.OrderStatus.CANCELED;
-import static com.jpa.use.usejpa.domain.OrderStatus.ORDERED;
+import static com.jpa.use.usejpa.domain.enumerate.OrderStatus.*;
 import static jakarta.persistence.CascadeType.ALL;
 import static jakarta.persistence.EnumType.STRING;
 import static jakarta.persistence.FetchType.LAZY;
@@ -19,7 +16,7 @@ import static jakarta.persistence.FetchType.LAZY;
 @Getter
 @Builder
 @AllArgsConstructor
-@RequiredArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "orders")
 @Entity
 public class Order {
@@ -68,7 +65,7 @@ public class Order {
     }
 
 
-    public void setMember (Member member){
+    protected void setMember (Member member){
         this.member = member;
         member.getOrder().add(this);
     }
@@ -77,7 +74,7 @@ public class Order {
         this.status = status;
     }
 
-    public void setDelivery(Delivery delivery){
+    protected void setDelivery(Delivery delivery){
         this.delivery = delivery;
         delivery.setOrder(this);
     }

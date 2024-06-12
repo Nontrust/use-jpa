@@ -1,6 +1,6 @@
 package com.jpa.use.usejpa.repository;
 
-import com.jpa.use.usejpa.domain.Item;
+import com.jpa.use.usejpa.domain.items.Item;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

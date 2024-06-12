@@ -7,11 +7,11 @@ import java.util.List;
 
 import static lombok.AccessLevel.PROTECTED;
 
-@Entity
 @Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = PROTECTED)
+@Entity
 public class Member {
     @Id @GeneratedValue
     private Long id;
