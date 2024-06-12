@@ -22,8 +22,8 @@ public class Book extends Item {
         this.isbn = isbn;
     }
 
-    public static Book createBook(String name , Long price, Integer stockQuantity, String author, UUID isbn) throws ItemException {
-        BookBuilder itemBuilder = (BookBuilder) Item.createSpecificItemBuilder(Movie.class, name, price, stockQuantity);
+    public static Book create(String name , Long price, Integer stockQuantity, String author, UUID isbn) throws ItemException {
+        BookBuilder itemBuilder = (BookBuilder) Item.createSpecificItemBuilder(Book.class, name, price, stockQuantity);
         return itemBuilder
                 .author(author)
                 .isbn(isbn)

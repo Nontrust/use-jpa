@@ -6,12 +6,14 @@ import com.jpa.use.usejpa.exception.ItemException;
 import com.jpa.use.usejpa.exception.item.NotEnoughStockException;
 import com.jpa.use.usejpa.exception.item.NotValidatePriceException;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import static jakarta.persistence.InheritanceType.SINGLE_TABLE;
 
@@ -22,7 +24,7 @@ import static jakarta.persistence.InheritanceType.SINGLE_TABLE;
 @DiscriminatorColumn(name = "dtype")
 @Inheritance(strategy = SINGLE_TABLE)
 @Entity
-public abstract class Item {
+public class Item {
     @Id @Column(name="item_id")
     private Long id;
     private String name;
@@ -42,7 +44,7 @@ public abstract class Item {
         this.stockQuantity = stockQuantity;
     }
 
-    public static Item createItem(String name , Long price, Integer stockQuantity) throws ItemException {
+    public static Item create(String name , Long price, Integer stockQuantity) throws ItemException {
         return Item.createSpecificItemBuilder(null, name, price, stockQuantity)
                 .build();
     }

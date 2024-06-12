@@ -20,8 +20,8 @@ public class Act extends Item {
         this.etc = etc;
     }
 
-    public static Act createMovie(String name , Long price, Integer stockQuantity, String artist, String etc) throws ItemException {
-        ActBuilder itemBuilder = (ActBuilder) Item.createSpecificItemBuilder(Movie.class, name, price, stockQuantity);
+     public static Act create(String name , Long price, Integer stockQuantity, String artist, String etc) throws ItemException {
+        ActBuilder itemBuilder = (ActBuilder) Item.createSpecificItemBuilder(Act.class, name, price, stockQuantity);
         return itemBuilder
                 .artist(artist)
                 .etc(etc)
