@@ -8,10 +8,12 @@ import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.jpa.use.usejpa.domain.enumerate.OrderStatus.*;
+import static com.jpa.use.usejpa.domain.enumerate.OrderStatus.CANCELED;
+import static com.jpa.use.usejpa.domain.enumerate.OrderStatus.ORDERED;
 import static jakarta.persistence.CascadeType.ALL;
 import static jakarta.persistence.EnumType.STRING;
 import static jakarta.persistence.FetchType.LAZY;
+import static org.springframework.util.ObjectUtils.isEmpty;
 
 @Getter
 @Builder
@@ -54,8 +56,8 @@ public class Order {
         return order;
     }
 
-    public void cancelOrder(){
-        if(CANCELED.equals(delivery.getState())){
+    public void cancel(){
+        if(!isEmpty(delivery) && CANCELED.equals(delivery.getState()) ) {
             throw new IllegalStateException("배송 완료된 건 입니다.");
         }
         this.setStatus(CANCELED);
@@ -63,7 +65,6 @@ public class Order {
             orderItem.cancel();
         }
     }
-
 
     protected void setMember (Member member){
         this.member = member;
