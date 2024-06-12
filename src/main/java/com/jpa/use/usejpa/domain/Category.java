@@ -1,5 +1,6 @@
 package com.jpa.use.usejpa.domain;
 
+import com.jpa.use.usejpa.domain.items.Item;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
