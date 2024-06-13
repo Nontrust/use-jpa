@@ -22,7 +22,7 @@ public class OrderService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    public Long save(Long memberId, Delivery delivery, Long itemId, Integer count) throws NotEnoughStockException {
+    public Long order(Long memberId, Delivery delivery, Long itemId, Integer count) throws NotEnoughStockException {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new IllegalStateException(memberId + "에 해당하는 유저가 없습니다."));
         Item item = itemRepository.findById(itemId)
