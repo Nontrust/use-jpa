@@ -30,7 +30,7 @@ public class OrderRepository {
     }
 
     public List<Order> findAllByMember(Member member){
-        String query = "select o from Order o where o.member = :member";
+        String query = "select o from Order o join o.member m where m = :member";
         return em.createQuery(query, Order.class)
                 .setParameter("member", member)
                 .getResultList();
@@ -40,7 +40,7 @@ public class OrderRepository {
         String query = """
                         select o
                             from Order o
-                            join Member m on m = o.member
+                            join o.member m
                             where o.id = :orderId
                                 and m.id = :memberId
                         """;

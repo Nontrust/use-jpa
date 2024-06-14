@@ -1,10 +1,7 @@
 package com.jpa.use.usejpa.domain;
 
 import com.jpa.use.usejpa.domain.enumerate.DeliveryStatus;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.util.Assert;
 
@@ -17,7 +14,7 @@ import static jakarta.persistence.EnumType.STRING;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class Delivery {
-    @Id
+    @Id @GeneratedValue
     private Long id;
     private Address address;
 

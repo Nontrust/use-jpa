@@ -23,6 +23,7 @@ import static jakarta.persistence.InheritanceType.SINGLE_TABLE;
 @Entity
 public class Item {
     @Id @Column(name="item_id")
+    @GeneratedValue
     private Long id;
     private String name;
     private Long price;
