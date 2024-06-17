@@ -3,12 +3,20 @@ package com.jpa.use.usejpa.repository;
 import com.jpa.use.usejpa.domain.Member;
 import com.jpa.use.usejpa.domain.Order;
 import com.jpa.use.usejpa.domain.enumerate.OrderStatus;
+import com.jpa.use.usejpa.vo.OrderSearch;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static org.springframework.util.ObjectUtils.isEmpty;
 
 @RequiredArgsConstructor
 @Repository
@@ -51,6 +59,34 @@ public class OrderRepository {
                 .getResultList();
 
         return Optional.ofNullable(!orders.isEmpty() ? orders.get(0) : null);
+    }
+
+    public List<Order> findAllBySearchMethods(OrderSearch orderSearch){
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Order> cq = cb.createQuery(Order.class);
+        List<Predicate> condition = new ArrayList<>();
+
+        Root<Order> from = cq.from(Order.class);
+        cq.select(from);
+
+
+        if(!isEmpty(orderSearch.orderStatus())) {
+            condition.add(
+                    cb.equal(from.get("status"),
+                    orderSearch.orderStatus())
+            );
+        }
+        if(!isEmpty(orderSearch.memberName())){
+            condition.add(
+                    cb.like(from.get("member"),
+                    "%"+orderSearch.memberName()+"%")
+            );
+        }
+
+        cq.where(condition.toArray(new Predicate[0]));
+
+        return em.createQuery(cq)
+                .getResultList();
     }
 
     public List<Order> findAllByOrderStatus(OrderStatus orderStatus){
