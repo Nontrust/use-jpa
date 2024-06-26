@@ -12,12 +12,13 @@ import lombok.experimental.SuperBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.jpa.use.usejpa.domain.items.ItemDType.*;
 import static jakarta.persistence.InheritanceType.SINGLE_TABLE;
 
+@Getter
 @SuperBuilder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-@Getter
 @DiscriminatorColumn(name = "dtype")
 @Inheritance(strategy = SINGLE_TABLE)
 @Entity
@@ -50,19 +51,19 @@ public class Item {
     protected static <T extends Item> ItemBuilder createSpecificItemBuilder(Class<T> clazz, String name , Long price, Integer stockQuantity) throws ItemException {
         checkItemState(price, stockQuantity);
 
-        if(Act.class.equals(clazz)){
+        if(ACT.getDType().equals(clazz)){
             return Act.builder()
                     .name(name)
                     .price(price)
                     .stockQuantity(stockQuantity);
         }
-        else if(Book.class.equals(clazz)){
+        else if(BOOK.getDType().equals(clazz)){
             return Book.builder()
                     .name(name)
                     .price(price)
                     .stockQuantity(stockQuantity);
         }
-        else if(Movie.class.equals(clazz)){
+        else if(MOVIE.getDType().equals(clazz)){
             return Movie.builder()
                     .name(name)
                     .price(price)
@@ -72,6 +73,15 @@ public class Item {
                 .name(name)
                 .price(price)
                 .stockQuantity(stockQuantity);
+    }
+
+    public static String getDType(Class<? extends Item> itemClass) {
+        for (ItemDType type : ItemDType.values()) {
+            if (type.getDType().equals(itemClass)) {
+                return type.name();
+            }
+        }
+        throw new IllegalArgumentException("Unknown class: " + itemClass);
     }
 
     /**
