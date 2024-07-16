@@ -1,5 +1,6 @@
 package com.jpa.use.usejpa.domain;
 
+import com.jpa.use.usejpa.vo.MemberForm;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,4 +22,13 @@ public class Member {
 
     @OneToMany(mappedBy = "member")
     private List<Order> order;
+
+
+    public static Member of(MemberForm m){
+        Address address = Address.create(m.city(), m.street(), m.zipcode());
+        return Member.builder()
+                .name(m.name())
+                .address(address)
+                .build();
+    }
 }

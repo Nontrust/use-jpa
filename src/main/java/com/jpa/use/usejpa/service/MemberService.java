@@ -2,6 +2,7 @@ package com.jpa.use.usejpa.service;
 
 import com.jpa.use.usejpa.domain.Member;
 import com.jpa.use.usejpa.repository.MemberRepository;
+import com.jpa.use.usejpa.vo.MemberForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +13,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberService {
     private final MemberRepository memberRepository;
+    @Transactional
+    public Member toMember(MemberForm form){
+        return Member.of(form);
+    }
 
     @Transactional
     public Long join(Member member){
