@@ -42,7 +42,7 @@ public class OrderServiceTest {
 
         Member member = getMember();
         Delivery delivery = Delivery.createDelivery(member.getAddress());
-        Book book = Book.create("테스트", 1111L, originStock, "aa", UUID.randomUUID());
+        Book book = Book.create("테스트", 1111L, originStock, "aa", UUID.randomUUID().toString());
 
         em.persist(member);
         em.persist(delivery);
@@ -95,7 +95,7 @@ public class OrderServiceTest {
 
         Member member = getMember();
         Delivery delivery = Delivery.createDelivery(member.getAddress());
-        Book book = Book.create("테스트", 1111L, originStock, "aa", UUID.randomUUID());
+        Book book = Book.create("테스트", 1111L, originStock, "aa", UUID.randomUUID().toString());
 
         em.persist(member);
         em.persist(delivery);
@@ -121,7 +121,7 @@ public class OrderServiceTest {
 
         Member member = getMember();
         Delivery delivery = Delivery.createDelivery(member.getAddress());
-        Book book = Book.create("테스트", 1111L, originStock, "aa", UUID.randomUUID());
+        Book book = Book.create("테스트", 1111L, originStock, "aa", UUID.randomUUID().toString());
 
         em.persist(member);
         em.persist(delivery);
@@ -133,12 +133,12 @@ public class OrderServiceTest {
     }
 
     @Test
-    public void 아이템의_서브타입이_정상적으로_등록되는지_테스트합니다() throws Exception, ItemException {
+    public void 아이템의_서브타입이_정상적으로_등록되는지_테스트합니다() throws ItemException {
         //given
         Item item = Item.create("일반 아이템", 1L, 1);
         Movie movie = Movie.create("무비 아이템", 1L, 1, "디렉터", "배우");
         Act act = Act.create("무비 아이템", 1L, 1, "디렉터", "배우");
-        Book book = Book.create("무비 아이템", 1L, 1, "디렉터", UUID.randomUUID());
+        Book book = Book.create("무비 아이템", 1L, 1, "디렉터", UUID.randomUUID().toString());
 
         //when
         for(Item i : Arrays.asList(item, movie, act, book)){
