@@ -102,7 +102,7 @@ public class Item {
         String field1 = itemForm.field1();
         String field2 = itemForm.field2();
 
-        switch (itemForm.itemDType()){
+        switch (this.getItemDType()){
             case BOOK   -> {
                 Book book = (Book) this;
                 book.setField(field1, field2);

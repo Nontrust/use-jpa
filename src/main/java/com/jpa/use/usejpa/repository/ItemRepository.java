@@ -34,6 +34,10 @@ public class ItemRepository {
         return Optional.ofNullable(!items.isEmpty() ? items.get(0) : null );
     }
 
+    public boolean existById(Long id){
+        return this.findById(id).isPresent();
+    }
+
     public List<Item> findAll() {
         String query = "select i from Item i";
         return em.createQuery(query, Item.class)

@@ -43,7 +43,7 @@ public class OrderItem {
                 .build();
     }
 
-    public void cancel(){
+    public void cancel() {
         getItem().addStockQuantity(count);
     }
 
