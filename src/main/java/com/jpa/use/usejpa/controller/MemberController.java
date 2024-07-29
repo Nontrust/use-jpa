@@ -39,7 +39,7 @@ public class MemberController {
 
     @GetMapping("/members")
     public String list(Model model){
-        List<Member> members = memberService.findAllMember();
+        List<Member> members = memberService.findAll();
         List<MemberVo> memberForms = members.stream()
                 .map(MemberVo::fromEntity)
                 .toList();

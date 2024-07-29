@@ -3,6 +3,9 @@ package com.jpa.use.usejpa.service;
 import com.jpa.use.usejpa.domain.Member;
 import com.jpa.use.usejpa.repository.MemberRepository;
 import com.jpa.use.usejpa.vo.MemberForm;
+import com.jpa.use.usejpa.vo.request.CreateMemberRequest;
+import com.jpa.use.usejpa.vo.request.UpdateMemberRequest;
+import com.jpa.use.usejpa.vo.response.UpdateMemberResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +22,11 @@ public class MemberService {
     }
 
     @Transactional
+    public Member toMember(CreateMemberRequest request){
+        return Member.of(request);
+    }
+
+    @Transactional
     public Long join(Member member){
         validationDuplicateMember(member);
 
@@ -27,7 +35,7 @@ public class MemberService {
     }
 
     @Transactional(readOnly = true)
-    public List<Member> findAllMember(){
+    public List<Member> findAll(){
         return memberRepository.findAll();
     }
 
@@ -35,6 +43,14 @@ public class MemberService {
     public Member findMemberById(Long id){
         return memberRepository.findById(id)
                 .orElseThrow(() -> new IllegalStateException(id+"에 해당하는 멤버가 없습니다."));
+    }
+
+    @Transactional
+    public UpdateMemberResponse update(Long memberId, UpdateMemberRequest request){
+        Member member = findMemberById(memberId);
+        member.update();
+
+        return UpdateMemberResponse.fromEntity(member);
     }
 
     /***
@@ -45,5 +61,4 @@ public class MemberService {
             throw new IllegalStateException("이미 존재하는 회원입니다.");
         }
     }
-
 }
