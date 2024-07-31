@@ -6,6 +6,7 @@ import com.jpa.use.usejpa.exception.item.NotEnoughStockException;
 import com.jpa.use.usejpa.repository.ItemRepository;
 import com.jpa.use.usejpa.repository.MemberRepository;
 import com.jpa.use.usejpa.repository.OrderRepository;
+import com.jpa.use.usejpa.vo.OrderSearch;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +29,7 @@ public class OrderService {
         Item item = itemRepository.findById(itemId)
                 .orElseThrow(() -> new IllegalStateException(itemId + "에 해당하는 제품이 없습니다."));
 
-        Address orderAddress = !isEmpty(delivery) ? member.getAddress()  : delivery.getAddress();
+        Address orderAddress = isEmpty(delivery) ? member.getAddress() : delivery.getAddress();
         Delivery orderDelivery = Delivery.createDelivery(orderAddress);
 
         OrderItem orderItem = OrderItem
@@ -45,10 +46,23 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
+    @Transactional(readOnly = true)
+    public List<Order> findAll(OrderSearch orderSearch) {
+        return orderRepository.findAllBySearchMethods(orderSearch);
+    }
+
 
     @Transactional
     public void cancel(Long memberId, Long orderId){
         Order order = orderRepository.findByOrderIdAndMemberId(orderId, memberId)
+                .orElseThrow(() -> new IllegalStateException("해당하는 제품이 없습니다."));
+
+        order.cancel();
+    }
+
+    @Transactional
+    public void cancel(Long orderId){
+        Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new IllegalStateException("해당하는 제품이 없습니다."));
 
         order.cancel();
